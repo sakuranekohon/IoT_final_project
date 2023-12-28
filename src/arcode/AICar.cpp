@@ -53,6 +53,10 @@ void AICar::init(){
 
   btSerial.begin(9600);
 
+  nh.initNode();
+  nh.advertise(pub);
+  nh.subscriber(sub);
+
   int cnt = 5;
   for(int i = cnt;i > 0;i--){
     Serial.print(cnt);

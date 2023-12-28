@@ -20,13 +20,18 @@
 
 #include <Arduino.h>
 #include <SoftwareSerial.h>
-#include <PubSubClient.h>
+#include <ros.h>
+#include <std_msg/Int8.h>
 
 class AICar{
   private:
+    ros::NodeHandle nh;
     byte speed;
     byte distance[2];
     SoftwareSerial btSerial(RX_PIN,TX_PIN);
+    std_msgs::Int8 pub_msg;
+    ros::Subsrciber<std_msgs::Int8> sub("publisher_topic",&);
+    ros::Publisher pub("subscriber_topic",&pub_msg);
   public:
     AICar(byte speed,byte noSafeDistance,byte normalDistance);
     void setSpeed(byte speed);

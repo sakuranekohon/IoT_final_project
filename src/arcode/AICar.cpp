@@ -1,9 +1,12 @@
 #include "AICar.h"
 
-AICar::AICar(byte speed, byte noSafeDistance, byte normalDistance)
-  : nh(), speed(speed), btSerial(RX_PIN, TX_PIN), pub("Arduino_message", &pub_msg), sub("Duckiebot_message", &AICar::subscriber, this) {
-  this->distance[0] = noSafeDistance;
-  this->distance[1] = normalDistance;
+AICar::AICar(byte speed, byte noSafeDistance, byte normalDistance,byte currentLane,byte laneSize,bool direction){
+  this->speed = speed;
+  this->distance.noSafeDistance = noSafeDistance;
+  this->distance.normalDistance = normalDistance;
+  this->lane.currentLane = currentLane;
+  this->lane.laneSize = laneSize;
+  this->lane.direction = direction;
 }
 
 void AICar::setSpeed(byte speed) {
@@ -11,23 +14,43 @@ void AICar::setSpeed(byte speed) {
 }
 
 void AICar::setNoSafeDistance(byte noSafeDistance) {
-  this->distance[0] = noSafeDistance;
+  this->distance.noSafeDistance = noSafeDistance;
 }
 
 void AICar::setNormalDistance(byte normalDistance) {
-  this->distance[1] = normalDistance;
+  this->distance.normalDistance = normalDistance;
+}
+
+void AICar::setCurrentLane(byte currentLane){
+  this->lane.currentLane = currentLane;
+}
+
+void AICar::setLaneSize(byte laneSize){
+  this->lane.laneSize = laneSize;
+}
+
+void AICar::setLaneDirection(bool direction){
+  this->lane.direction = direction;
+}
+
+void AICar::setCarStatus(bool stop){
+  this->isCarStop = stop;
 }
 
 byte AICar::getSpeed() {
   return this->speed;
 }
 
-byte AICar::getNoSafeDistance() {
-  return this->distance[0];
+Distance AICar::getDistance() {
+  return this->distance;
 }
 
-byte AICar::getNormalDistance() {
-  return this->distance[1];
+Lane AICar::getLane(){
+  return this->lane;
+}
+
+bool AICar::getCarStatus(){
+  return this->isCarStop;
 }
 
 void AICar::init() {
@@ -46,17 +69,12 @@ void AICar::init() {
   Serial.print("speed = ");
   Serial.print(speed);
   Serial.print(", not safe distance = ");
-  Serial.print(distance[0]);
+  Serial.print(distance.noSafeDistance);
   Serial.print(", normal distance = ");
-  Serial.print(distance[1]);
+  Serial.print(distance.normalDistance);
   Serial.println("Start in five seconds");
 
-  btSerial.begin(9600);
-
-  nh.initNode();
-  nh.advertise(pub);
-  nh.subscribe(sub);
-
+  isCarStop = false;
   int cnt = 5;
   for (int i = cnt; i > 0; i--) {
     Serial.print(cnt);
@@ -92,6 +110,7 @@ void AICar::stop(bool isUrgent) {
     digitalWrite(RINF, LOW);
     digitalWrite(RINB, LOW);
   }
+  isCarStop = true;
 }
 
 void AICar::switchLanes(bool isLeft, byte offset) {
@@ -110,33 +129,20 @@ void AICar::switchLanes(bool isLeft, byte offset) {
   }
 }
 
-void AICar::publisher(byte carDistance, byte laneSize, byte occLane) {
-  String message = String(carDistance) + String(laneSize) + String(occLane);
-  pub_msg.data = message;
-  pub.publish(&pub_msg);
-  nh.spinOnce();
+void AICar::publisher(byte carDistance) {
+  String message = String(carDistance) + String(lane.laneSize) + String(lane.currentLane);
+  Serial.println(message);
 }
 
-void AICar::subscriber(const std_msgs::String &sub_msg) {
-  String str = sub_msg.data;
-  sub_str = str;
-  if (str[0] == "0") {
-    stop(1);
-  } else if (str[0] == "1") {
-    stop(0);
-  } else {
-    byte laneSize = byte(str[1]);
-    byte occLane = byte(str[2]);
-    if (laneSize == 1) {
-      stop(0);
-    } else {
-      if (occLane - 1 > 0) {
-        switchLanes(1, 30);
-      } else if (occLane + 1 < laneSize) {
-        switchLanes(0, 30);
-      }
+String AICar::subscriber() {
+  String data;
+  if(Serial.available()){
+    char c;
+    while((c = Serial.read()) != '\n'){
+      data += c;
     }
   }
+  return data;
 }
 
 byte AICar::calDistance() {

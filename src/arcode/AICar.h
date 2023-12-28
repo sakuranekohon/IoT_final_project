@@ -19,36 +19,43 @@
 #define TX_PIN 0
 
 #include <Arduino.h>
-#include <SoftwareSerial.h>
-#include <ros.h>
-#include <std_msgs/String.h>
+
+struct Distance {
+    byte noSafeDistance;
+    byte normalDistance;
+};
+
+struct Lane {
+    byte currentLane;
+    byte laneSize;
+    bool direction;
+  };
 
 class AICar {
 private:
-  ros::NodeHandle nh;
   byte speed;
-  byte distance[2];
-  SoftwareSerial btSerial;
-  String sub_str;
-  /*create ROS publisher and subscriber*/
-  std_msgs::String pub_msg;
-  ros::Publisher pub;
-  ros::Subscriber<std_msgs::String> sub;
-
-  void subscriber(const std_msgs::String& sub_msg);
+  Distance distance;
+  Lane lane;
+  bool isCarStop;
 public:
-  AICar(byte speed, byte noSafeDistance, byte normalDistance);
+  AICar(byte speed, byte noSafeDistance, byte normalDistance, byte currentlane, byte laneSize, bool direction);
   void setSpeed(byte speed);
   void setNoSafeDistance(byte noSafeDistance);
   void setNormalDistance(byte normalDistance);
+  void setCurrentLane(byte currentLane);
+  void setLaneSize(byte laneSize);
+  void setLaneDirection(bool direction);
+  void setCarStatus(bool stop);
   byte getSpeed();
-  byte getNoSafeDistance();
-  byte getNormalDistance();
+  Distance getDistance();
+  Lane getLane();
+  bool getCarStatus();
   void init();
   void move(bool isFront);
   void stop(bool isUrgent);
-  void switchLanes(bool isLeft);
-  void publisher(byte carDistance, byte laneSize, byte occLane);
+  void switchLanes(bool isLeft, byte offset);
+  void publisher(byte carDistance);
+  String subscriber();
   byte calDistance();
 };
 

@@ -41,6 +41,8 @@ void loop() {
     if (carCD <= car.getDistance().noSafeDistance) {
       String sendRosData = String(1) + String(car.getLane().laneSize) + String(car.getLane().currentLane);
       car.publisher(1);
+    }else{
+      car.publisher(1000);
     }
   } else {
     car.stop(1);

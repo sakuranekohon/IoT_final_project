@@ -7,6 +7,7 @@ AICar::AICar(byte speed, byte noSafeDistance, byte normalDistance,byte currentLa
   this->lane.currentLane = currentLane;
   this->lane.laneSize = laneSize;
   this->lane.direction = direction;
+  this->BTSerial = new SoftwareSerial(10, 11);
 }
 
 void AICar::setSpeed(byte speed) {
@@ -73,11 +74,13 @@ void AICar::init() {
   Serial.print(", normal distance = ");
   Serial.print(distance.normalDistance);
   Serial.println("Start in five seconds");
+  
+   BTSerial->begin(38400);
 
   isCarStop = false;
   int cnt = 5;
   for (int i = cnt; i > 0; i--) {
-    Serial.print(cnt);
+    Serial.print(i);
     Serial.println("...");
     delay(1000);
   }
@@ -132,13 +135,17 @@ void AICar::switchLanes(bool isLeft, byte offset) {
 void AICar::publisher(byte carDistance) {
   String message = String(carDistance) + String(lane.laneSize) + String(lane.currentLane);
   Serial.println(message);
+  if (carDistance == 1000)
+    BTSerial->println("A");
+  else
+    BTSerial->println(message);
 }
 
 String AICar::subscriber() {
   String data;
-  if(Serial.available()){
+  if(BTSerial->available()){
     char c;
-    while((c = Serial.read()) != '\n'){
+    while((c = BTSerial->read()) != '\n'){
       data += c;
     }
   }

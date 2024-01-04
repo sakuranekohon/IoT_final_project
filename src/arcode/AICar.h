@@ -14,11 +14,8 @@
 #define ECHO 2
 #define TRIG 3
 
-/*RX TX set*/
-#define RX_PIN 1
-#define TX_PIN 0
-
 #include <Arduino.h>
+#include <SoftwareSerial.h>
 
 struct Distance {
     byte noSafeDistance;
@@ -38,6 +35,7 @@ private:
   Lane lane;
   bool isCarStop;
 public:
+  SoftwareSerial* BTSerial; 
   AICar(byte speed, byte noSafeDistance, byte normalDistance, byte currentlane, byte laneSize, bool direction);
   void setSpeed(byte speed);
   void setNoSafeDistance(byte noSafeDistance);

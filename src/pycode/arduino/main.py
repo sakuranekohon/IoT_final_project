@@ -13,7 +13,6 @@ class Arduino:
         self.mqttAddress = mqttAddress
         self.mqttPort = mqttPort
         self.mqttClinet = mqtt.Client()
-        __connectMqtt()
 
     def __connectMqtt(self):
         self.mqttClinet.connect(self.mqttAddress,self.mqttPort,60)
@@ -44,6 +43,8 @@ class Arduino:
                 else:
                     self.mqttClinet.publish(topic,data)
                 print("Received data from Arduino:", data)
+                if(data == 23321):
+                    self.socke
         except Exception as e:
             print("[ERROR]", e)
 

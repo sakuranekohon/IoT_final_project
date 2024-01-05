@@ -3,6 +3,7 @@ import paho.mqtt.client as mqtt
 import time
 import threading
 import functools
+import sys
 
 class Arduino:
     def __init__(self,ArduinoName,mqttAddress,mqttPort):
@@ -13,9 +14,6 @@ class Arduino:
         self.mqttAddress = mqttAddress
         self.mqttPort = mqttPort
         self.mqttClinet = mqtt.Client()
-
-    def __connectMqtt(self):
-        self.mqttClinet.connect(self.mqttAddress,self.mqttPort,60)
 
     def connect(self):
         nearDevice = bluetooth.discover_devices()
@@ -33,41 +31,70 @@ class Arduino:
                 print("Connection error:", e)
         else:
             print("Not find Arduino")
+
+        def on_connect(client, userdata, flags, rc):
+            if(rc == 0):
+                print("Connect to MQTT server")
+                self.mqttClinet.subscribe("Duckiebot/data")
+            else:
+                print("Connect failed")
+
+        self.mqttClinet.on_connect = on_connect
+        self.mqttClinet.connect(self.mqttAddress,self.mqttPort,60)
+        self.mqttClinet.loop_start()
     
     def publish(self, topic):
         try:
             while True:
                 data = self.socket.recv(1024).decode()
-                if(data == 23221):
-                    self.mqttClinet.publish(topic)
-                else:
-                    self.mqttClinet.publish(topic,data)
                 print("Received data from Arduino:", data)
-                if(data == 23321):
-                    self.socke
+                if(data == 23221):
+                    self.mqttClinet.publish(topic,"000")
+                else:
+                    self.mqttClinet.publish(topic,str(data))
         except Exception as e:
             print("[ERROR]", e)
 
     
     def subscribe(self):
-        try:
-            while True:
-                pass
-        except Exception as e:
-            print("[ERROR]",e)
+        def on_message(client,userdata,msg):
+            duckieData = str(msg.payload.decode("utf-8"))
+            print("Duckiebot Node : ",duckieData)
+            
+            self.socket.send(duckieData)
+        
+        self.mqttClinet.on_message = on_message
+
+    def disconnect(self):
+        self.socket.close()
+
+def check_input():
+    while True:
+        user_input = input()  # 等待終端輸入
+        if user_input.lower() == "exit":  # 如果輸入了 "exit"，程式就會結束
+            break
 
 def main():
     arduino = Arduino("Arara","192.168.137.35",1883)
     arduino.connect()
 
-    pub = threading.Thread(target=functools.partial(arduino.publish, "Arduino/"))
+    pub = threading.Thread(target=functools.partial(arduino.publish, "Arduino/data"))
     pub.daemon = True
     pub.start()
-    
+
+    sub = threading.Thread(target=arduino.subscribe)
+    sub.daemon = True
+    sub.start()
+
+    input_thread = threading.Thread(target=check_input)  # 建立一個線程用來監聽終端輸入
+    input_thread.daemon = True
+    input_thread.start()
+
 
     while True:
         time.sleep(1)
-        print("Still running...")
+
+    arduino.disconnect()
 
 if __name__ == "__main__":
     main()

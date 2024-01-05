@@ -43,11 +43,13 @@ void loop() {
       car.publisher(1);
       car.stop(1);
       car.setCarStatus(1);
+      delay(1000);
     }else{
       car.publisher(1000);
     }
   } else {
     car.stop(1);
+    delay(1000);
     if (car.calDistance() > 30)
       car.setCarStatus(0);
   }

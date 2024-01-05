@@ -1,2 +1,0 @@
-
--DCATKIN_DEVEL_PREFIX=/media/sf_IoT_final_project/devel -DCMAKE_INSTALL_PREFIX=/media/sf_IoT_final_project/install -G Unix Makefiles

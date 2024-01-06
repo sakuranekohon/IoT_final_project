@@ -5,6 +5,7 @@ import time
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code "+str(rc))
 
+
 def main():
     # 初始化 MQTT 客户端
     client = mqtt.Client()
@@ -19,7 +20,7 @@ def main():
     # 发布消息到指定主题（此处为示例，可以根据需要发布消息）
     while True:
         # 发布消息到指定主题
-        client.publish("test/hello", "Hello MQTT")
+        client.publish("Duckiebot/data", "Hello ARDUINO")
         time.sleep(1)  # 延时一秒
 
 if __name__ == "__main__":

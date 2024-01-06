@@ -3,7 +3,6 @@ import paho.mqtt.client as mqtt
 import time
 import threading
 import functools
-import sys
 
 class Arduino:
     def __init__(self,ArduinoName,mqttAddress,mqttPort):
@@ -86,7 +85,7 @@ def main():
     sub.daemon = True
     sub.start()
 
-    input_thread = threading.Thread(target=check_input)  # 建立一個線程用來監聽終端輸入
+    input_thread = threading.Thread(target=check_input)
     input_thread.daemon = True
     input_thread.start()
 

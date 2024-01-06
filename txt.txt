@@ -1,0 +1,6 @@
+!pip install roboflow
+
+from roboflow import Roboflow
+rf = Roboflow(api_key="GtOT1OpfpRTwGmMQUsvq")
+project = rf.workspace("aiworking").project("yolo_class")
+dataset = project.version(4).download("yolov8")

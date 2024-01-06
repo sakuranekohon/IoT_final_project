@@ -1,2 +1,4 @@
-# IoT_final_project
- IOT期末專題(車禍警示系統)
+# IoT期末專題
+##使用前請確保有安裝ros1
+
+ 

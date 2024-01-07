@@ -1,0 +1,8 @@
+prefix=/media/sf_IoT_final_project/devel
+
+Name: duckiebot
+Description: Description of duckiebot
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

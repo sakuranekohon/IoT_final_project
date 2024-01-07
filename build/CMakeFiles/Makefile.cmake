@@ -13,11 +13,11 @@ set(CMAKE_MAKEFILE_DEPENDS
   "catkin/catkin_generated/version/package.cmake"
   "catkin_generated/installspace/_setup_util.py"
   "catkin_generated/order_packages.cmake"
-  "duckiebot/packages/duckiebot/catkin_generated/package.cmake"
+  "duckiebot/packages/duckie/catkin_generated/package.cmake"
   "server/catkin_generated/package.cmake"
   "/media/sf_IoT_final_project/src/CMakeLists.txt"
-  "/media/sf_IoT_final_project/src/duckiebot/packages/duckiebot/CMakeLists.txt"
-  "/media/sf_IoT_final_project/src/duckiebot/packages/duckiebot/package.xml"
+  "/media/sf_IoT_final_project/src/duckiebot/packages/duckie/CMakeLists.txt"
+  "/media/sf_IoT_final_project/src/duckiebot/packages/duckie/package.xml"
   "/media/sf_IoT_final_project/src/server/CMakeLists.txt"
   "/media/sf_IoT_final_project/src/server/package.xml"
   "/opt/ros/noetic/share/catkin/cmake/all.cmake"
@@ -156,7 +156,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "gtest/CMakeFiles/CMakeDirectoryInformation.cmake"
   "gtest/googlemock/CMakeFiles/CMakeDirectoryInformation.cmake"
   "gtest/googletest/CMakeFiles/CMakeDirectoryInformation.cmake"
-  "duckiebot/packages/duckiebot/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "duckiebot/packages/duckie/CMakeFiles/CMakeDirectoryInformation.cmake"
   "server/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
@@ -171,5 +171,5 @@ set(CMAKE_DEPEND_INFO_FILES
   "gtest/googlemock/CMakeFiles/gmock.dir/DependInfo.cmake"
   "gtest/googletest/CMakeFiles/gtest_main.dir/DependInfo.cmake"
   "gtest/googletest/CMakeFiles/gtest.dir/DependInfo.cmake"
-  "duckiebot/packages/duckiebot/CMakeFiles/_catkin_empty_exported_target.dir/DependInfo.cmake"
+  "duckiebot/packages/duckie/CMakeFiles/_catkin_empty_exported_target.dir/DependInfo.cmake"
   )

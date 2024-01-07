@@ -398,6 +398,12 @@ _gtest_SOURCES:FILEPATH=/usr/src/gtest/src/gtest.cc
 catkin_DIR:PATH=/opt/ros/noetic/share/catkin/cmake
 
 //Value Computed by CMake
+duckie_BINARY_DIR:STATIC=/media/sf_IoT_final_project/build/duckiebot/packages/duckie
+
+//Value Computed by CMake
+duckie_SOURCE_DIR:STATIC=/media/sf_IoT_final_project/src/duckiebot/packages/duckie
+
+//Value Computed by CMake
 duckiebot_BINARY_DIR:STATIC=/media/sf_IoT_final_project/build/duckiebot/packages/duckiebot
 
 //Value Computed by CMake

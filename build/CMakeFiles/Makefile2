@@ -54,14 +54,14 @@ CMAKE_BINARY_DIR = /media/sf_IoT_final_project/build
 
 # The main recursive "all" target.
 all: gtest/all
-all: duckiebot/packages/duckiebot/all
+all: duckiebot/packages/duckie/all
 all: server/all
 
 .PHONY : all
 
 # The main recursive "preinstall" target.
 preinstall: gtest/preinstall
-preinstall: duckiebot/packages/duckiebot/preinstall
+preinstall: duckiebot/packages/duckie/preinstall
 preinstall: server/preinstall
 
 .PHONY : preinstall
@@ -73,28 +73,28 @@ clean: CMakeFiles/clean_test_results.dir/clean
 clean: CMakeFiles/tests.dir/clean
 clean: CMakeFiles/download_extra_data.dir/clean
 clean: gtest/clean
-clean: duckiebot/packages/duckiebot/clean
+clean: duckiebot/packages/duckie/clean
 clean: server/clean
 
 .PHONY : clean
 
 #=============================================================================
-# Directory level rules for directory duckiebot/packages/duckiebot
+# Directory level rules for directory duckiebot/packages/duckie
 
 # Recursive "all" directory target.
-duckiebot/packages/duckiebot/all:
+duckiebot/packages/duckie/all:
 
-.PHONY : duckiebot/packages/duckiebot/all
+.PHONY : duckiebot/packages/duckie/all
 
 # Recursive "preinstall" directory target.
-duckiebot/packages/duckiebot/preinstall:
+duckiebot/packages/duckie/preinstall:
 
-.PHONY : duckiebot/packages/duckiebot/preinstall
+.PHONY : duckiebot/packages/duckie/preinstall
 
 # Recursive "clean" directory target.
-duckiebot/packages/duckiebot/clean: duckiebot/packages/duckiebot/CMakeFiles/_catkin_empty_exported_target.dir/clean
+duckiebot/packages/duckie/clean: duckiebot/packages/duckie/CMakeFiles/_catkin_empty_exported_target.dir/clean
 
-.PHONY : duckiebot/packages/duckiebot/clean
+.PHONY : duckiebot/packages/duckie/clean
 
 #=============================================================================
 # Directory level rules for directory gtest
@@ -416,31 +416,31 @@ gtest/googletest/CMakeFiles/gtest.dir/clean:
 .PHONY : gtest/googletest/CMakeFiles/gtest.dir/clean
 
 #=============================================================================
-# Target rules for target duckiebot/packages/duckiebot/CMakeFiles/_catkin_empty_exported_target.dir
+# Target rules for target duckiebot/packages/duckie/CMakeFiles/_catkin_empty_exported_target.dir
 
 # All Build rule for target.
-duckiebot/packages/duckiebot/CMakeFiles/_catkin_empty_exported_target.dir/all:
-	$(MAKE) -f duckiebot/packages/duckiebot/CMakeFiles/_catkin_empty_exported_target.dir/build.make duckiebot/packages/duckiebot/CMakeFiles/_catkin_empty_exported_target.dir/depend
-	$(MAKE) -f duckiebot/packages/duckiebot/CMakeFiles/_catkin_empty_exported_target.dir/build.make duckiebot/packages/duckiebot/CMakeFiles/_catkin_empty_exported_target.dir/build
+duckiebot/packages/duckie/CMakeFiles/_catkin_empty_exported_target.dir/all:
+	$(MAKE) -f duckiebot/packages/duckie/CMakeFiles/_catkin_empty_exported_target.dir/build.make duckiebot/packages/duckie/CMakeFiles/_catkin_empty_exported_target.dir/depend
+	$(MAKE) -f duckiebot/packages/duckie/CMakeFiles/_catkin_empty_exported_target.dir/build.make duckiebot/packages/duckie/CMakeFiles/_catkin_empty_exported_target.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/sf_IoT_final_project/build/CMakeFiles --progress-num= "Built target _catkin_empty_exported_target"
-.PHONY : duckiebot/packages/duckiebot/CMakeFiles/_catkin_empty_exported_target.dir/all
+.PHONY : duckiebot/packages/duckie/CMakeFiles/_catkin_empty_exported_target.dir/all
 
 # Build rule for subdir invocation for target.
-duckiebot/packages/duckiebot/CMakeFiles/_catkin_empty_exported_target.dir/rule: cmake_check_build_system
+duckiebot/packages/duckie/CMakeFiles/_catkin_empty_exported_target.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /media/sf_IoT_final_project/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 duckiebot/packages/duckiebot/CMakeFiles/_catkin_empty_exported_target.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 duckiebot/packages/duckie/CMakeFiles/_catkin_empty_exported_target.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /media/sf_IoT_final_project/build/CMakeFiles 0
-.PHONY : duckiebot/packages/duckiebot/CMakeFiles/_catkin_empty_exported_target.dir/rule
+.PHONY : duckiebot/packages/duckie/CMakeFiles/_catkin_empty_exported_target.dir/rule
 
 # Convenience name for target.
-_catkin_empty_exported_target: duckiebot/packages/duckiebot/CMakeFiles/_catkin_empty_exported_target.dir/rule
+_catkin_empty_exported_target: duckiebot/packages/duckie/CMakeFiles/_catkin_empty_exported_target.dir/rule
 
 .PHONY : _catkin_empty_exported_target
 
 # clean rule for target.
-duckiebot/packages/duckiebot/CMakeFiles/_catkin_empty_exported_target.dir/clean:
-	$(MAKE) -f duckiebot/packages/duckiebot/CMakeFiles/_catkin_empty_exported_target.dir/build.make duckiebot/packages/duckiebot/CMakeFiles/_catkin_empty_exported_target.dir/clean
-.PHONY : duckiebot/packages/duckiebot/CMakeFiles/_catkin_empty_exported_target.dir/clean
+duckiebot/packages/duckie/CMakeFiles/_catkin_empty_exported_target.dir/clean:
+	$(MAKE) -f duckiebot/packages/duckie/CMakeFiles/_catkin_empty_exported_target.dir/build.make duckiebot/packages/duckie/CMakeFiles/_catkin_empty_exported_target.dir/clean
+.PHONY : duckiebot/packages/duckie/CMakeFiles/_catkin_empty_exported_target.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

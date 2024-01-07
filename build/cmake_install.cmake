@@ -131,7 +131,7 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/media/sf_IoT_final_project/build/gtest/cmake_install.cmake")
-  include("/media/sf_IoT_final_project/build/duckiebot/packages/duckiebot/cmake_install.cmake")
+  include("/media/sf_IoT_final_project/build/duckiebot/packages/duckie/cmake_install.cmake")
   include("/media/sf_IoT_final_project/build/server/cmake_install.cmake")
 
 endif()

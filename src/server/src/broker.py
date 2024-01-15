@@ -45,7 +45,7 @@ class Broker:
         rospy.spin()
 
 def main():
-    broker = Broker("localhost",1883,"Arduino/data")
+    broker = Broker("192.168.137.35",1883,"Arduino/data")
     broker.connect()
     
     MTR = threading.Thread(target=broker.mqttToRos)

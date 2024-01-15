@@ -15,7 +15,7 @@ void loop() {
   if (!car.getCarStatus()) {
     car.move(1);
     //收到000以外表示前方有車禍、檢查車禍是否在同車道
-    if (rosData != "000" && byte(rosData[2]) == car.getLane().currentLane) {
+    if (rosData != "000" || byte(rosData[2]) == car.getLane().currentLane) {
       if (rosData[0] == '1') {
         car.stop(1);
       } else if (rosData[0] == '2') {

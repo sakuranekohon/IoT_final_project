@@ -5,6 +5,7 @@ import threading
 import time
 from std_msgs.msg import String
 
+#mqtt、ros broker
 class Broker:
     def __init__(self,mqttAddress,mqttPort,mqttTopic):
         self.mqttAddress = mqttAddress

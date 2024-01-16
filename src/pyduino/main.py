@@ -14,6 +14,7 @@ class Arduino:
         self.mqttPort = mqttPort
         self.mqttClinet = mqtt.Client()
 
+    #藍芽及mqtt連線
     def connect(self):
         nearDevice = bluetooth.discover_devices()
         for device in nearDevice:
@@ -42,6 +43,7 @@ class Arduino:
         self.mqttClinet.connect(self.mqttAddress,self.mqttPort,60)
         self.mqttClinet.loop_start()
     
+    #將arduino資料publish到mqtt topic上
     def publish(self, topic):
         try:
             while True:
@@ -54,7 +56,7 @@ class Arduino:
         except Exception as e:
             print("[ERROR]", e)
 
-    
+    #讀取mqtt server topic
     def subscribe(self):
         def on_message(client,userdata,msg):
             duckieData = str(msg.payload.decode("utf-8"))

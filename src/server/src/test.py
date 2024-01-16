@@ -2,6 +2,7 @@
 import rospy
 from std_msgs.msg import String
 
+#ros pub test
 if __name__ =='__main__':
     rospy.init_node('duckie',anonymous=True)
     pub = rospy.Publisher('Duckiebot/data',String,queue_size=10)

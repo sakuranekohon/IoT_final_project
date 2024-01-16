@@ -87,6 +87,7 @@ void AICar::init() {
   Serial.println("Start");
 }
 
+//移動
 void AICar::move(bool isFront) {
   digitalWrite(LINF, isFront);
   digitalWrite(LINB, !isFront);
@@ -97,6 +98,7 @@ void AICar::move(bool isFront) {
   analogWrite(RPWM, speed);
 }
 
+//停止移動，會判斷是不是要急煞，是的話急煞，不是就緩慢減速
 void AICar::stop(bool isUrgent) {
   if (isUrgent) {
     digitalWrite(LINF, LOW);
@@ -116,6 +118,7 @@ void AICar::stop(bool isUrgent) {
   isCarStop = true;
 }
 
+//變換車道
 void AICar::switchLanes(bool isLeft, byte offset) {
   if (isLeft) {
     analogWrite(RPWM, speed + offset);
@@ -132,6 +135,7 @@ void AICar::switchLanes(bool isLeft, byte offset) {
   }
 }
 
+//上傳讀取到的資訊(第一位數:車輛距離，第二位數:車道數量，第三位數:當前車道(車禍車道))
 void AICar::publisher(byte carDistance) {
   String message = String(carDistance) + String(lane.laneSize) + String(lane.currentLane);
   //Serial.print("Arduino Data = ");
@@ -142,6 +146,7 @@ void AICar::publisher(byte carDistance) {
     BTSerial->println(message);
 } 
 
+//讀取資料
 String AICar::subscriber() {
   String data;
   while (BTSerial->available()) {

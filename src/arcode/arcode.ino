@@ -1,6 +1,6 @@
 #include "AICar.h"
 
-AICar car(150, 8, 30, 1, 2, 1);
+AICar car(30, 8, 30, 1, 2, 1);
 
 void setup() {
   Serial.begin(9600);
@@ -9,9 +9,9 @@ void setup() {
 String rosData = "000";
 
 void loop() {
-  if (Serial.available()) {
-    rosData = car.subscriber();
-  }
+  
+  rosData = car.subscriber();
+  
   if (!car.getCarStatus()) {
     car.move(1);
     //收到000以外表示前方有車禍、檢查車禍是否在同車道
@@ -45,7 +45,7 @@ void loop() {
       car.setCarStatus(1);
       delay(1000);
     }else{
-      car.publisher(1000);
+      car.publisher(10);
     }
   } else {
     car.stop(1);

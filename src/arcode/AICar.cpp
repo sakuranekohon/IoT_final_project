@@ -134,23 +134,29 @@ void AICar::switchLanes(bool isLeft, byte offset) {
 
 void AICar::publisher(byte carDistance) {
   String message = String(carDistance) + String(lane.laneSize) + String(lane.currentLane);
-  Serial.println(message);
-  if (carDistance == 1000)
-    BTSerial->println("A");
+  //Serial.print("Arduino Data = ");
+  //Serial.println(message);
+  if (carDistance == 10)
+    BTSerial->println("000");
   else
     BTSerial->println(message);
-}
+} 
 
 String AICar::subscriber() {
   String data;
-  if(BTSerial->available()){
-    char c;
-    while((c = BTSerial->read()) != '\n'){
-      data += c;
+  while (BTSerial->available()) {
+    char c = BTSerial->read();
+    if (c == '\n') {
+      break;
     }
+    data += c;
   }
+  delay(100);  // 添加延遲
+  Serial.print("Ros data : ");
+  Serial.println(data);
   return data;
 }
+
 
 byte AICar::calDistance() {
   digitalWrite(TRIG, LOW);

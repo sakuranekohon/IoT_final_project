@@ -46,8 +46,8 @@ class Arduino:
         try:
             while True:
                 data = self.socket.recv(1024).decode()
-                print("Received data from Arduino:", data)
-                if(data == 23221):
+                #print("Received data from Arduino:", data)
+                if(data == "23221"):
                     self.mqttClinet.publish(topic,"000")
                 else:
                     self.mqttClinet.publish(topic,str(data))
@@ -60,7 +60,7 @@ class Arduino:
             duckieData = str(msg.payload.decode("utf-8"))
             print("Duckiebot Node : ",duckieData)
             
-            self.socket.send(duckieData)
+            self.socket.send(duckieData.encode() + b'\n')
         
         self.mqttClinet.on_message = on_message
 

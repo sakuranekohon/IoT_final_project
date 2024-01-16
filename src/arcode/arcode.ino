@@ -1,6 +1,6 @@
 #include "AICar.h"
 
-AICar car(30, 8, 30, 1, 2, 1);
+AICar car(40, 8, 30, 1, 2, 1);
 
 void setup() {
   Serial.begin(9600);
